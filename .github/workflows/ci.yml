@@ -1,0 +1,33 @@
+name: C++ CI
+
+on:
+  push:
+    branches:
+      - main  # Runs the workflow whenever code is pushed to 'main'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # Step to pull code from GitHub
+
+    - name: Set up C++ environment
+      run: sudo apt-get install g++  # Install C++ compiler on GitHub runner
+
+    - name: Compile C++ code
+      run: g++ -o hello hello.cpp  # Compile hello.cpp to an executable called hello
+
+    - name: Run the program
+      run: ./hello  # Run the executable to print "Hello, CI!"
+
+    - name: Archive the executable
+      if: success()
+      uses: actions/upload-artifact@v2
+      with:
+        name: hello_executable
+        path: hello
