@@ -1,5 +1,5 @@
 #include <iostream>
-int main() {
+//int main() {
     std::cout << "Hello, CI!" << std::endl;
     return 0;
 }
